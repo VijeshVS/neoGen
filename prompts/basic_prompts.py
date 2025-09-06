@@ -33,6 +33,7 @@ def coder_agent_prompt(plan):
     Tool: write_file(path: str, content: str) → Create or overwrite a file with the provided content.
     Tool: list_files(directory: str) → List all files and directories at a given path.
     Tool: execute_command(cmd: str) -> Executes a linux command and returns the output
+    Tool: create_folder(path: str) → Creates a folder inside necessary directories.
 
     Rules:
     - Run one step at a time

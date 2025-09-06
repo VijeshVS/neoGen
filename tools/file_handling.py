@@ -19,8 +19,6 @@ def write_file(path: str, content: str) -> str:
     """Create or overwrite a file at the given path inside generated_project."""
     full_path = safe_path(path)
 
-    print(path,content,"broooo working !!!")
-
     os.makedirs(os.path.dirname(full_path), exist_ok=True)
     with open(full_path, "w", encoding="utf-8") as f:
         f.write(content)
@@ -32,3 +30,12 @@ def list_files(directory: str = ".") -> str:
     if not os.path.exists(full_dir):
         return f"Error: Directory not found: {full_dir}"
     return ", ".join(os.listdir(full_dir))
+
+def create_folder(path: str) -> str:
+    """Create a folder (and any necessary parent folders) inside generated_project."""
+    full_path = safe_path(path)
+    try:
+        os.makedirs(full_path, exist_ok=True)
+        return f"Folder created successfully: {full_path}"
+    except Exception as e:
+        return f"Error while creating folder {full_path}: {str(e)}"

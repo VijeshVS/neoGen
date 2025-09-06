@@ -1,7 +1,7 @@
 from models.llm import gemini_chatml
 from schema.agent_state import OutputModel
 from prompts.basic_prompts import coder_agent_prompt
-from tools.file_handling import read_file, list_files, write_file
+from tools.file_handling import read_file, list_files, write_file, create_folder
 from tools.system import execute_command
 from inspect import signature
 import json
@@ -11,7 +11,8 @@ available_tools = {
     "execute_command": execute_command,
     "read_file": read_file,
     "list_files": list_files,
-    "write_file": write_file
+    "write_file": write_file,
+    "create_folder": create_folder
 }
 
 def call_tool(func, params):
@@ -103,5 +104,5 @@ def call_coding_agent(state: dict):
     message_history.append({"role":"system","content": coder_agent_prompt(plan)})
     print("⛓️‍💥 Performing tasks using chain of thought") 
     perform_tasks(implementations)
-    print(message_history)
+    print("\n✅ Your application is ready!")
     return state
