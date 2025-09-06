@@ -5,7 +5,6 @@ from tools.file_handling import read_file, list_files, write_file
 from tools.system import execute_command
 from inspect import signature
 import json
-from time import sleep
 
 message_history = []
 available_tools = {
@@ -101,7 +100,8 @@ def perform_tasks(implementation):
 def call_coding_agent(state: dict):
     plan = state["plan"]
     implementations = state["architect"].implementations
-    message_history.append({"role":"system","content": coder_agent_prompt(plan)}) 
+    message_history.append({"role":"system","content": coder_agent_prompt(plan)})
+    print("⛓️‍💥 Performing tasks using chain of thought") 
     perform_tasks(implementations)
     print(message_history)
     return state
