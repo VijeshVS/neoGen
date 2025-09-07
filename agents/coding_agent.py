@@ -5,6 +5,7 @@ from tools.file_handling import read_file, list_files, write_file, create_folder
 from tools.system import execute_command
 from inspect import signature
 import json
+from time import sleep
 
 message_history = []
 available_tools = {
@@ -96,6 +97,7 @@ def perform_tasks(implementation):
             else:
                 print("✅",res.content)
                 break
+            sleep(10)
         
 
 def call_coding_agent(state: dict):

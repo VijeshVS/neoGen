@@ -29,7 +29,10 @@ def list_files(directory: str = ".") -> str:
     full_dir = safe_path(directory)
     if not os.path.exists(full_dir):
         return f"Error: Directory not found: {full_dir}"
-    return ", ".join(os.listdir(full_dir))
+    files = ", ".join(os.listdir(full_dir))
+    if not files:
+        return f"No files found in directory: {full_dir}"
+    return files
 
 def create_folder(path: str) -> str:
     """Create a folder (and any necessary parent folders) inside generated_project."""
