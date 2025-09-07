@@ -1,4 +1,3 @@
-import cmd
 from models.llm import gemini_chatml
 from schema.agent_state import OutputModel
 from prompts.basic_prompts import coder_agent_prompt
