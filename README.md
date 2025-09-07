@@ -54,8 +54,7 @@ pip install -r requirements.txt
 
 ---
 
-🤝 Contributing
-Contributions are welcome!
+🤝 Contributions are welcome!
 
 - Fork the repository
 - Create a new branch (git checkout -b feature-name)
