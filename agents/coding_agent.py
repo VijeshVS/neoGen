@@ -116,7 +116,7 @@ def call_coding_agent(state: dict):
     plan = state["plan"]
     implementations = state["architect"].implementations
     message_history.append({"role":"system","content": coder_agent_prompt(plan)})
-    print("⛓️‍💥 Performing tasks using chain of thought") 
+    print("💪 Performing tasks using chain of thought") 
     perform_tasks(implementations)
     print("\n🎉  Your application is ready!")
     return state
