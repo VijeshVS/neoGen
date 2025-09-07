@@ -3,6 +3,7 @@ from agents.architect_agent import call_architect_agent
 from agents.planner_agent import call_planner_agent
 from agents.coding_agent import call_coding_agent
 from langgraph.constants import START, END
+from scripts.prestart_msg import prestart_message
 
 graph = StateGraph(dict)
 graph.add_node("planner_agent",call_planner_agent)
@@ -16,7 +17,14 @@ graph.add_edge("coding_agent",END)
 
 agent = graph.compile()
 
-user_prompt = input("👉 ")
-agent.invoke({
-    "user_prompt": user_prompt
-})
+prestart_message()
+
+try:
+    user_prompt = input("👉 ")
+    agent.invoke({
+        "user_prompt": user_prompt
+    })
+except KeyboardInterrupt:
+    print("\nProgram interrupted by user. Exiting...")
+except Exception as e:
+    print(f"\nAn error occurred: {e}")
