@@ -47,7 +47,7 @@ neoGen’s intelligence is split across specialized nodes:
 Clone the repository and install dependencies:  
 
 ```bash
-git clone https://github.com/yourusername/neogen.git
+git clone https://github.com/vijeshvs/neogen.git
 cd neogen
 pip install -r requirements.txt
 ```
