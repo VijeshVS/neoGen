@@ -1,3 +1,4 @@
+import cmd
 from models.llm import gemini_chatml
 from schema.agent_state import OutputModel
 from prompts.basic_prompts import coder_agent_prompt
@@ -6,6 +7,10 @@ from tools.system import execute_command
 from inspect import signature
 import json
 from time import sleep
+from rich.console import Console
+from rich.syntax import Syntax
+
+console = Console()
 
 message_history = []
 available_tools = {
@@ -80,7 +85,15 @@ def perform_tasks(implementation):
             if res.step == "PLAN":
                 print("💭",res.content)
             elif res.step == "TOOL":
-                print("🛠️ ",res.tool_name,":",res.tool_input)
+                print("🛠️ ",res.tool_name)
+                if res.tool_input.path:
+                    console.print(f"[bold green]filePath: {res.tool_input.path}[/bold green]")
+                if res.tool_input.content:
+                    syntax = Syntax(res.tool_input.content, "javascript", theme="monokai", line_numbers=True)
+                    console.print(syntax)
+                if res.tool_input.cmd:
+                    syntax = Syntax(res.tool_input.cmd, "bash", theme="monokai", line_numbers=True)
+                    console.print(syntax)
                 tool_func = available_tools[res.tool_name]
                 tool_output = call_tool(tool_func, res.tool_input)
                 dump_tool_output = json.dumps({
