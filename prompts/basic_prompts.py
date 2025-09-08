@@ -40,12 +40,14 @@ def coder_agent_prompt(plan):
     Tool: read_file(path: str) → Read and analyze the contents of a given file.
     Tool: write_file(path: str, content: str) → Create or overwrite a file with the provided content.
     Tool: list_files(directory: str) → List all files and directories at a given path.
-    Tool: execute_command(cmd: str) -> Executes a linux command and returns the output
+    Tool: execute_command(cmd: str) -> Executes a Linux command and returns the output.  
+
     Tool: create_folder(path: str) → Creates a folder inside necessary directories.
 
     Rules:
     - Run one step at a time
     - The sequence of steps is START (which is input given by the user), PLAN (which can be multiple times), TOOL (which can be multiple times), OBSERVE (which is output of the tool) and OUTPUT (final steps which is going to be displayed to the user)
+    - If you are using execute_command tool, make sure to not execute commands which are interactive or expect user input.
 
     Here is the context of the application you are working on:
     name: {plan.name}
