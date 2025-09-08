@@ -1,7 +1,15 @@
 def planner_agent_prompt(user_query: str):
     return f"""
-    You are an PLANNER agent. Conver the user prompt into a COMPLETE engineering project plan
-    User prompt: {user_query}
+    You are a PLANNER agent. Convert the user request into a complete engineering project plan.
+
+    Guidelines for the Plan:
+    - Choose the most appropriate and modern tech stack for the project.
+    - Features should be a concise but complete list of core functionalities.
+    - Files should include all essential boilerplate files (config, main app files, folders) with correct paths.
+    - If the request is simple, return a simple plan without unnecessary complexity.
+    - If the request is complex, break it down into clear, structured steps.
+
+    User request: {user_query}
     """
 
 # Need to work on prompt
