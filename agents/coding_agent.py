@@ -76,14 +76,14 @@ def perform_tasks(implementation):
             "role": "user",
             "content": dump_user_input
         })
-
+        tool_called = False
         # Chain of thought
         while True:
             res = get_model_response()
-            
             if res.step == "PLAN":
                 print("💭",res.content)
             elif res.step == "TOOL":
+                tool_called = True
                 print("🛠️ ",res.tool_name)
                 if res.tool_input.path:
                     console.print(f"[bold green]filePath: {res.tool_input.path}[/bold green]")
@@ -107,8 +107,20 @@ def perform_tasks(implementation):
                 })
                 print("👀",tool_output)
             else:
-                print("✅",res.content)
-                break
+                if tool_called:
+                    print("✅",res.content)
+                    break
+                else:
+                    print("🫨 AI hallicunating reiterating !!")
+                    message_history.append({
+                        "role": "user",
+                        "content": json.dumps({
+                            "step": "START",
+                            "content": task_description,
+                            "tool_name": None,
+                            "tool_input": None
+                        })
+                    })
             sleep(10)
         
 
